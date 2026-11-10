@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101619">
+  <title>Mythfall — Realms without end</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Mythfall home"><span class="brand-mark">✦</span><span>MYTHFALL<small>REALMS WITHOUT END</small></span></a>
+      <div class="realm-status"><span class="online-dot"></span> ELDERVALE <i>•</i> REALM 01</div>
+      <div class="top-actions"><button class="icon-button" id="sound-toggle" title="Toggle ambience" aria-label="Toggle sound">♫</button><button class="icon-button" id="menu-button" title="Menu" aria-label="Open menu">☰</button><div class="avatar-mini" id="mini-avatar">?</div></div>
+    </header>
+
+    <section class="game-layout">
+      <aside class="left-rail">
+        <section class="panel character-panel">
+          <div class="panel-heading"><span>YOUR ADVENTURER</span><span class="tiny-gold">✦ <b id="level">1</b></span></div>
+          <div class="character-card"><div class="portrait" id="portrait">✦</div><div class="character-name"><strong id="character-name">Wanderer</strong><span id="class-name">Choose a calling</span></div></div>
+          <div class="stat-line"><span>HEALTH</span><span id="hp-text">100 / 100</span></div><div class="meter hp-meter"><i id="hp-bar"></i></div>
+          <div class="stat-line"><span>MANA</span><span id="mana-text">60 / 60</span></div><div class="meter mana-meter"><i id="mana-bar"></i></div>
+          <div class="stat-line xp-line"><span>EXPERIENCE</span><span id="xp-text">0 / 100</span></div><div class="meter xp-meter"><i id="xp-bar"></i></div>
+          <div class="stat-grid"><div><span>POWER</span><b id="power-stat">8</b></div><div><span>ARMOR</span><b id="armor-stat">3</b></div><div><span>COINS</span><b id="coin-stat">12</b></div></div>
+          <button class="subtle-button" id="change-class">✧ &nbsp; Change calling</button>
+        </section>
+
+        <section class="panel quest-panel">
+          <div class="panel-heading"><span>✧ &nbsp; JOURNAL</span><span class="quest-count">ACTIVE</span></div>
+          <div class="quest-title">A quieter grove</div>
+          <p>The creatures of Sunmeadow have grown restless. Thin their numbers and bring peace back to the trail.</p>
+          <div class="quest-progress"><span>Defeat meadow creatures</span><b id="quest-progress">0 / 5</b></div>
+          <div class="meter quest-meter"><i id="quest-bar"></i></div>
+          <div class="quest-reward">REWARD <span>✦ 120 XP</span><span>◈ 30</span></div>
+        </section>
+
+        <section class="panel location-panel"><div class="panel-heading"><span>WORLD ATLAS</span><span class="tiny-gold">⌖</span></div><div class="mini-map" id="mini-map"><span class="map-path"></span><span class="map-dot"></span><span class="map-player"></span><span class="map-label">SUNMEADOW</span></div><div class="location-caption"><span class="online-dot"></span> Sunmeadow <span class="coords" id="coordinates">(42, 18)</span></div></section>
+      </aside>
+
+      <section class="world-column">
+        <div class="world-toolbar"><div><span class="eyebrow">THE FRONTIER OF ELDERVALE</span><h1>Sunmeadow <span>✦</span></h1></div><div class="world-weather"><span>☀</span><div><b>Fair skies</b><small>Springtide · Day 3</small></div></div></div>
+        <div class="world-frame"><canvas id="world" aria-label="Sunmeadow game world"></canvas>
+          <div class="world-overlay top-left"><span class="region-tag">✦ &nbsp; SAFE TRAILS</span></div>
+          <div class="world-overlay top-right"><span class="clock-icon">◷</span> <span id="clock">08:42</span></div>
+          <div class="world-overlay bottom-left"><span class="help-key">WASD</span> Move <span class="help-key">SPACE</span> Attack</div>
+          <div class="toast" id="toast" aria-live="polite"></div>
+          <div class="combat-flash" id="combat-flash"></div>
+        </div>
+        <div class="world-footer"><span><i class="online-dot"></i> <b id="area-status">A peaceful morning in Sunmeadow</b></span><span>✧ &nbsp; <span id="nearby-count">3</span> creatures nearby</span></div>
+        <nav class="action-bar" aria-label="Abilities"><button class="ability" id="ability-1"><span class="ability-key">1</span><span class="ability-icon">⚔</span><span class="ability-name">Strike</span><span class="ability-cost">FREE</span></button><button class="ability" id="ability-2"><span class="ability-key">2</span><span class="ability-icon">✹</span><span class="ability-name">Power hit</span><span class="ability-cost">15 MANA</span></button><button class="ability" id="ability-3"><span class="ability-key">3</span><span class="ability-icon">❖</span><span class="ability-name">Quickstep</span><span class="ability-cost">20 MANA</span></button><button class="ability" id="ability-4"><span class="ability-key">4</span><span class="ability-icon">✚</span><span class="ability-name">Mend</span><span class="ability-cost">25 MANA</span></button><button class="ability inventory-ability" id="inventory-button"><span class="ability-key">I</span><span class="ability-icon">▣</span><span class="ability-name">Satchel</span><span class="ability-cost" id="bag-count">0 ITEMS</span></button></nav>
+        <div class="mobile-controls"><button data-move="up">▲</button><div><button data-move="left">◀</button><button data-move="down">▼</button><button data-move="right">▶</button></div><button class="mobile-attack" id="mobile-attack">⚔</button></div>
+      </section>
+
+      <aside class="right-rail">
+        <section class="panel guide-panel"><div class="panel-heading"><span>✦ &nbsp; FIELD GUIDE</span><button class="close-small" id="guide-info" aria-label="Guide information">?</button></div><div class="guide-feature"><div class="guide-art">♧</div><div><small>LOCAL WILDLIFE</small><b>Wildwood slime</b><span>Uncommon nuisance</span></div></div><p>Soft-bodied and curious. It might look harmless, but a group can overwhelm the unwary.</p><div class="guide-meta"><span>THREAT <b class="threat">● ● ○ ○ ○</b></span><span>LEVEL <b>1–2</b></span></div></section>
+        <section class="panel activity-panel"><div class="panel-heading"><span>REALM ACTIVITY</span><span class="activity-live">LIVE</span></div><div class="activity-feed" id="activity-feed"><div class="feed-item"><span class="feed-icon">✧</span><p><b>Welcome to Eldervale.</b><br>Your story starts here.</p><time>now</time></div><div class="feed-item"><span class="feed-icon green">♧</span><p><b>Sunmeadow</b><br>The wilds are quiet... for now.</p><time>1m</time></div></div><button class="chat-button" id="chat-button">◌ &nbsp; Say hello to the realm <span>↗</span></button></section>
+        <section class="panel tips-panel"><div class="tip-icon">☼</div><div><span>TRAVELER'S TIP</span><p>Explore the meadow and keep your health topped up. Resting restores your mana.</p></div></section>
+      </aside>
+    </section>
+    <footer class="bottom-bar"><span>MYTHFALL <i>©</i> AN ENDLESS ADVENTURE</span><span>YOUR JOURNEY IS SAVED AUTOMATICALLY <b>●</b></span><button id="reset-game">NEW ADVENTURE ↗</button></footer>
+  </main>
+
+  <div class="modal-backdrop show" id="class-modal"><section class="modal class-modal"><div class="modal-kicker">A WORLD OF YOUR OWN</div><h2>Choose your calling</h2><p class="modal-intro">Every legend begins somewhere. Who will you become?</p><div class="class-grid">
+    <button class="class-card selected" data-class="warrior"><span class="class-symbol warrior-symbol">⚔</span><b>Warrior</b><span>Steel and courage. A steadfast protector who thrives in the thick of battle.</span><small>VITALITY · DEFENSE</small></button>
+    <button class="class-card" data-class="mage"><span class="class-symbol mage-symbol">✷</span><b>Mage</b><span>Master of the arcane. Unleash brilliant magic from a safe distance.</span><small>ARCANE · BURST</small></button>
+    <button class="class-card" data-class="ranger"><span class="class-symbol ranger-symbol">➶</span><b>Ranger</b><span>A keen-eyed wanderer. Quick strikes and an unbreakable bond with nature.</span><small>PRECISION · AGILITY</small></button>
+    <button class="class-card" data-class="cleric"><span class="class-symbol cleric-symbol">✚</span><b>Cleric</b><span>Keeper of the old light. Heal your wounds and smite the unruly.</span><small>RESTORATION · LIGHT</small></button>
+  </div><label class="name-field">YOUR NAME<input id="hero-name-input" maxlength="14" value="Aster" autocomplete="off" placeholder="Enter a name"></label><button class="primary-button" id="begin-adventure">ENTER ELDERVALE <span>→</span></button><div class="modal-footnote">A living realm, a new beginning <span>✦</span></div></section></div>
+
+  <div class="modal-backdrop" id="inventory-modal"><section class="modal small-modal"><button class="modal-close" data-close="inventory-modal">×</button><div class="modal-kicker">YOUR BELONGINGS</div><h2>Adventurer's satchel</h2><p class="modal-intro">Everything you've gathered on the road.</p><div id="inventory-list" class="inventory-list"></div><button class="primary-button" data-close="inventory-modal">BACK TO THE MEADOW <span>→</span></button></section></div>
+  <div class="modal-backdrop" id="menu-modal"><section class="modal small-modal"><button class="modal-close" data-close="menu-modal">×</button><div class="modal-kicker">ELDERVALE · REALM 01</div><h2>Your journey</h2><p class="modal-intro">Your progress is saved in this browser.</p><div class="menu-stats"><span>Adventurer<b id="menu-hero">Aster</b></span><span>Calling<b id="menu-class">Warrior</b></span><span>Level<b id="menu-level">1</b></span><span>Defeated<b id="menu-kills">0</b></span></div><button class="primary-button" data-close="menu-modal">RETURN TO ADVENTURE <span>→</span></button></section></div>
+  <script src="game.js"></script>
+</body>
+</html>
